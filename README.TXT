@@ -3,7 +3,7 @@
   *
   * @version 0.1
   */
-  
+
 This is a simple mathematical processor that was made as an example of using OOP in tasks like string parsing.
 This math processor can calculate expressions like "2+3*4".
 

@@ -18,9 +18,9 @@ typedef EElementType TElementType;
 
 struct SElement
 {
-	string value;
-	TElementType type;
-	unsigned int pos;
+    string value;
+    TElementType type;
+    unsigned int pos;
     SElement() {};
     SElement( string value, EElementType type, unsigned int pos ) : type( type ), value( value ), pos( pos ) {};
 };

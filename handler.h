@@ -11,14 +11,14 @@
 
 class CHandler
 {
-	TErrorList _errorList;
-	bool _success;
-	void setErrorList( TErrorList errorList );
+    TErrorList _errorList;
+    bool _success;
+    void setErrorList( TErrorList errorList );
 
 public:
-	CHandler() { this->_success = true; };
-	double calculate( string rawExpression );
-	inline bool success() const;
-	
-	string getErrors() const;
+    CHandler() { this->_success = true; };
+    double calculate( string rawExpression );
+    inline bool success() const;
+    
+    string getErrors() const;
 };

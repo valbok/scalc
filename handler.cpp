@@ -1,4 +1,4 @@
-/** 
+/**
  * @file handler.cpp
  * @class CHandler
  */
@@ -7,9 +7,9 @@
 // Should we include it like that?
 #include "actionhandler.cpp"
 #include "converter.cpp"
-#include "parser.cpp" 
-#include "executer.cpp" 
-#include "validator.cpp" 
+#include "parser.cpp"
+#include "executer.cpp"
+#include "validator.cpp"
 
 /**
  * @brief Calculates the passed expression
@@ -17,36 +17,36 @@
  */
 double CHandler::calculate( string rawExpression )
 {
-	// 1. Parse elements: numbers, actions and separators
+    // 1. Parse elements: numbers, actions and separators
     CParser parser;
-	CActionHandler actionHandler;
-	parser.setActionHandler( &actionHandler );
-	TElementMap elementMap = parser.parse( rawExpression );
-	
-	if ( parser.errorExists() ) 
-	{
-		this->setErrorList( parser.getErrorList() );
-		this->_success = false;
-		return 0;
-	}
+    CActionHandler actionHandler;
+    parser.setActionHandler( &actionHandler );
+    TElementMap elementMap = parser.parse( rawExpression );
 
-	// 2. Validate parsed elements
-	CValidator validator;
-	validator.setActionHandler( &actionHandler );
-	if ( !validator.validate( &elementMap ) )
-	{
-		this->setErrorList( validator.getErrorList() );
-		this->_success = false;
-		return 0;
-	}
-	
-	// 3. Calculate
-	CExecuter executer;
-	executer.setActionHandler( &actionHandler );
-	executer.setElementMap( &elementMap );
-	double result = executer.execute();
+    if ( parser.errorExists() )
+    {
+        this->setErrorList( parser.getErrorList() );
+        this->_success = false;
+        return 0;
+    }
 
-	return result;
+    // 2. Validate parsed elements
+    CValidator validator;
+    validator.setActionHandler( &actionHandler );
+    if ( !validator.validate( &elementMap ) )
+    {
+        this->setErrorList( validator.getErrorList() );
+        this->_success = false;
+        return 0;
+    }
+
+    // 3. Calculate
+    CExecuter executer;
+    executer.setActionHandler( &actionHandler );
+    executer.setElementMap( &elementMap );
+    double result = executer.execute();
+
+    return result;
 }
 
 /**
@@ -54,7 +54,7 @@ double CHandler::calculate( string rawExpression )
  */
 void CHandler::setErrorList( TErrorList errorList )
 {
-	this->_errorList = errorList;
+    this->_errorList = errorList;
 }
 
 /**
@@ -62,7 +62,7 @@ void CHandler::setErrorList( TErrorList errorList )
  */
 bool CHandler::success() const
 {
-	return this->_success;
+    return this->_success;
 }
 
 /**
@@ -71,11 +71,11 @@ bool CHandler::success() const
  */
 string CHandler::getErrors() const
 {
-	string resultStr = "";
-	for( unsigned i = 0; i < _errorList.size(); i++ )
-	{
-		resultStr += _errorList.at( i ) + "\n";
-	}
-	
-	return resultStr;
+    string resultStr = "";
+    for( unsigned i = 0; i < _errorList.size(); i++ )
+    {
+        resultStr += _errorList.at( i ) + "\n";
+    }
+
+    return resultStr;
 }

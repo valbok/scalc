@@ -1,6 +1,6 @@
 /**
  * @file actionhandler.cpp
- * @class CActionHandler 
+ * @class CActionHandler
  */
 
 #include "actionhandler.h"
@@ -43,11 +43,11 @@ inline bool CActionHandler::isSeparator( string s ) const
  */
 void CActionHandler::addAction( string actionStr, TActionPriority type )
 {
-	// The action should not already exist
-	// and should not be a separator
+    // The action should not already exist
+    // and should not be a separator
     if ( !this->isAction( actionStr ) && !this->isSeparator( actionStr ) )
     {
-		TAction action( actionStr, type );
+        TAction action( actionStr, type );
         this->_actionList.push_back( action );
     }
 }
@@ -72,7 +72,7 @@ void CActionHandler::fillActionList()
 bool CActionHandler::isAction( string actionKey ) const
 {
     // TODO: implement with stl find() and iterators
-    
+
     for ( unsigned int i = 0; i < this->_actionList.size(); i++ )
     {
         if ( this->_actionList[i].key == actionKey )
@@ -90,7 +90,7 @@ bool CActionHandler::isAction( string actionKey ) const
 bool CActionHandler::isCustomAction( string actionKey ) const
 {
     // TODO: implement with stl find() and iterators
-    
+
     for ( unsigned int i = 0; i < this->_actionList.size(); i++ )
     {
         if ( this->_actionList[i].key == actionKey && this->_actionList[i].priority == E_Custom )
@@ -110,42 +110,42 @@ bool CActionHandler::isCustomAction( string actionKey ) const
  */
 double CActionHandler::executeAction( string actionStr, double firstParam, double lastParam ) const
 {
-	if ( actionStr == "+" )
-	{
-		return this->add( firstParam, lastParam );
-	}
+    if ( actionStr == "+" )
+    {
+        return this->add( firstParam, lastParam );
+    }
 
-	if ( actionStr == "-" )
-	{
-		return this->sub( firstParam, lastParam );
-	}
-	
-	if ( actionStr == "*" )
-	{
-		return this->mul( firstParam, lastParam );
-	}
+    if ( actionStr == "-" )
+    {
+        return this->sub( firstParam, lastParam );
+    }
 
-	if ( actionStr == "/" )
-	{
-		return this->div( firstParam, lastParam );
-	}
+    if ( actionStr == "*" )
+    {
+        return this->mul( firstParam, lastParam );
+    }
 
-	if ( actionStr == "sqr" )
-	{
-		return this->sqr( lastParam );
-	}
+    if ( actionStr == "/" )
+    {
+        return this->div( firstParam, lastParam );
+    }
 
-	if ( actionStr == "sqrt" )
-	{
-		return this->sqrt( lastParam );
-	}
+    if ( actionStr == "sqr" )
+    {
+        return this->sqr( lastParam );
+    }
 
-	if ( actionStr == "^" )
-	{
-		return this->mypow( firstParam, lastParam );
-	}
+    if ( actionStr == "sqrt" )
+    {
+        return this->sqrt( lastParam );
+    }
 
-	return 0;
+    if ( actionStr == "^" )
+    {
+        return this->mypow( firstParam, lastParam );
+    }
+
+    return 0;
 }
 
 /**
@@ -153,7 +153,7 @@ double CActionHandler::executeAction( string actionStr, double firstParam, doubl
  */
 inline double CActionHandler::sqr( double lastParam ) const
 {
-	return lastParam * lastParam;
+    return lastParam * lastParam;
 }
 
 /**
@@ -161,7 +161,7 @@ inline double CActionHandler::sqr( double lastParam ) const
  */
 inline double CActionHandler::sqrt( double lastParam ) const
 {
-	return pow( lastParam, 0.5 );
+    return pow( lastParam, 0.5 );
 }
 
 /**
@@ -169,7 +169,7 @@ inline double CActionHandler::sqrt( double lastParam ) const
  */
 inline double CActionHandler::add( double firstParam, double lastParam ) const
 {
-	return firstParam + lastParam;
+    return firstParam + lastParam;
 }
 
 /**
@@ -177,7 +177,7 @@ inline double CActionHandler::add( double firstParam, double lastParam ) const
  */
 inline double CActionHandler::sub( double firstParam, double lastParam ) const
 {
-	return firstParam - lastParam;
+    return firstParam - lastParam;
 }
 
 /**
@@ -185,7 +185,7 @@ inline double CActionHandler::sub( double firstParam, double lastParam ) const
  */
 inline double CActionHandler::mypow( double firstParam, double lastParam ) const
 {
-	return pow( firstParam, lastParam );
+    return pow( firstParam, lastParam );
 }
 
 /**
@@ -193,12 +193,12 @@ inline double CActionHandler::mypow( double firstParam, double lastParam ) const
  */
 inline double CActionHandler::div( double firstParam, double lastParam ) const
 {
-	if ( lastParam == 0 )
-	{
-		return 0;
-	}
+    if ( lastParam == 0 )
+    {
+        return 0;
+    }
 
-	return firstParam / lastParam;
+    return firstParam / lastParam;
 }
 
 /**
@@ -206,19 +206,19 @@ inline double CActionHandler::div( double firstParam, double lastParam ) const
  */
 inline double CActionHandler::mul( double firstParam, double lastParam ) const
 {
-	return firstParam * lastParam;
+    return firstParam * lastParam;
 }
 
 /**
- * @brief Gets action priority 
+ * @brief Gets action priority
  * @return priority of passed action
  */
 unsigned CActionHandler::getPriorityByAction( string actionStr )
 {
-	if ( !this->isAction( actionStr ) )
-	{
-		return 0;
-	}
+    if ( !this->isAction( actionStr ) )
+    {
+        return 0;
+    }
 
     for ( unsigned int i = 0; i < this->_actionList.size(); i++ )
     {
@@ -228,5 +228,5 @@ unsigned CActionHandler::getPriorityByAction( string actionStr )
         }
     }
 
-	return 0;
+    return 0;
 }

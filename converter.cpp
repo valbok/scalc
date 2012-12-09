@@ -10,14 +10,14 @@
  */
 inline string CConverter::doubleToStr( double x )
 {
-	ostringstream o;
-	
-	if ( ( o << x ) )
-	{
-		return o.str();
-	}
-	
-	return 0;
+    ostringstream o;
+
+    if ( ( o << x ) )
+    {
+        return o.str();
+    }
+
+    return 0;
 }
 
 /**

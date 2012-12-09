@@ -11,7 +11,7 @@
  */
 void CParser::setActionHandler( CActionHandler *actionHandler )
 {
-	this->_actionHandler = actionHandler;
+    this->_actionHandler = actionHandler;
 }
 
 /**
@@ -22,35 +22,35 @@ string CParser::getActionByPosition( string actionStr, unsigned int pos ) const
 {
     string elem, currentChar = "", nextChar= "";
     
-	while ( pos < actionStr.length() )
+    while ( pos < actionStr.length() )
     {
         currentChar = actionStr.at( pos );
         elem += currentChar;
-		
-		// If elem is action
-		if ( this->_actionHandler->isAction( elem )  )
-		{
-			// Try to check if elem is not custom action
-			if ( !this->_actionHandler->isCustomAction( elem ) )
-			{
-				return elem;
-			}
-			else
-			{
-				if ( ( pos + 1 ) < actionStr.length() )
-				{
-					// If elem is custom action it means next char after current pos should be open separator
-					// If next char is not open separator (for example '(') we should continue the parsing
-					nextChar = actionStr.at( pos + 1 );
-					if ( this->_actionHandler->isOpenSeparator( nextChar ) )
-					{
-						return elem;
-					}
-				}
-			}
-		}
+        
+        // If elem is action
+        if ( this->_actionHandler->isAction( elem )  )
+        {
+            // Try to check if elem is not custom action
+            if ( !this->_actionHandler->isCustomAction( elem ) )
+            {
+                return elem;
+            }
+            else
+            {
+                if ( ( pos + 1 ) < actionStr.length() )
+                {
+                    // If elem is custom action it means next char after current pos should be open separator
+                    // If next char is not open separator (for example '(') we should continue the parsing
+                    nextChar = actionStr.at( pos + 1 );
+                    if ( this->_actionHandler->isOpenSeparator( nextChar ) )
+                    {
+                        return elem;
+                    }
+                }
+            }
+        }
 
-		++pos;
+        ++pos;
     }
 
     return "";
@@ -96,8 +96,8 @@ void CParser::parseActions( string actionStr, unsigned currentPos )
     bool errorExists = false;
     // If some errors write error to this var
     string errorStr;
-	
-	while ( pos < actionStr.length() )
+    
+    while ( pos < actionStr.length() )
     {
         currentActionChar = actionStr.at( pos );
         
@@ -139,7 +139,7 @@ void CParser::parseActions( string actionStr, unsigned currentPos )
                 }
             }
         }
-		
+        
         // Prevent unneeded iterations
         pos = !actionStrSplitted.empty() ? pos + actionStrSplitted.length() : ++pos;
         
@@ -155,7 +155,7 @@ void CParser::parseActions( string actionStr, unsigned currentPos )
     // If these two strings are not equal so a problem exists
     if ( actionStrJoined != actionStr )
     {
-		errorStr = NSParserErrors::UNKNOWN_SYMBOLS + "; " + NSParserErrors::CHECK_RIGHT_SYNTAX_NEAR + " '" + actionStr + "' at pos " + CConverter::intToStr( currentPos );
+        errorStr = NSParserErrors::UNKNOWN_SYMBOLS + "; " + NSParserErrors::CHECK_RIGHT_SYNTAX_NEAR + " '" + actionStr + "' at pos " + CConverter::intToStr( currentPos );
         this->addError( errorStr );
     }
 }
@@ -179,8 +179,8 @@ void CParser::parseElements()
     while ( currentPos < rawExpression.length() )
     {
         currentChar = rawExpression.at( currentPos );
-		
-		if ( CConverter::isNumeric( currentChar ) )
+        
+        if ( CConverter::isNumeric( currentChar ) )
         {
             numStr += currentChar;
             
@@ -195,7 +195,7 @@ void CParser::parseElements()
         }
         else
         {
-			actionStr += currentChar;
+            actionStr += currentChar;
             if ( !numStr.empty() )
             {
                 this->addElement( numStr, E_Number, currentPos - numStr.length() );
@@ -207,7 +207,7 @@ void CParser::parseElements()
         currentPos++;
     }
     
-	// If the expresion contains some numbers in the end
+    // If the expresion contains some numbers in the end
     if ( !numStr.empty() )
     {
         this->addElement( numStr, E_Number, currentPos - numStr.length() );
@@ -238,7 +238,7 @@ TElementMap CParser::parse( string rawExpression )
     this->setExpression( rawExpression );
     this->parseElements();
 
-	return this->_elementMap;
+    return this->_elementMap;
 }
 
 /**
